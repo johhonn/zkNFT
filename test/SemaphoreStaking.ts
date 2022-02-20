@@ -42,7 +42,7 @@ describe('SemaphoreWhistleblowing', () => {
   })
 
   describe('# addStaker', () => {
-    it.only('Should add a whistleblower to an existing entity', async () => {
+    it('Should add a whistleblower to an existing entity', async () => {
       const identity = new ZkIdentity(Strategy.MESSAGE, 'test')
       const identityCommitment = identity.genIdentityCommitment()
 

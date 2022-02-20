@@ -10,6 +10,7 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
     /// @dev Gets an editor address and return their entity.
     mapping(address => uint256) private entities;
     mapping(uint256 => address) public membershipTokens;
+    mapping(uint256 => uint256) public commitmentNFTs;
     event EntityCreated(uint256 entityId, address indexed editor);
     /// @dev Checks if the editor is the transaction sender.
     /// @param entityId: Id of the entity.
@@ -45,6 +46,7 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
             address(this),
             id
         );
+        commitmentNFTs[entityId] = id;
         _addMember(entityId, identityCommitment);
     }
 
@@ -61,6 +63,11 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
             identityCommitment,
             proofSiblings,
             proofPathIndices
+        );
+        IERC721(membershipTokens[entityId]).safeTransferFrom(
+            address(this),
+            receiver,
+            commitmentNFTs[entityId]
         );
     }
 

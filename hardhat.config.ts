@@ -14,6 +14,7 @@ dotenvConfig({ path: resolve(__dirname, './.env') })
 let PRIVATEKEY =
   process.env.PRIVATEKEY ||
   '0x0000000000000000000000000000000000000000000000000000000000000001'
+
 const hardhatConfig: HardhatUserConfig = {
   solidity: config.solidity,
   paths: {
@@ -34,9 +35,16 @@ const hardhatConfig: HardhatUserConfig = {
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
       accounts: [PRIVATEKEY],
-      gasPrice: 30000000,
-      gas: 3000000,
     },
+    kovan: {
+      url: `https://kovan.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+      accounts: [PRIVATEKEY],
+    },
+    harmony_testnet: {
+      url: `https://api.s0.b.hmny.io`,
+      accounts: [PRIVATEKEY],
+    },
+    harmony_mainnet: { url: `https://api.harmony.one`, accounts: [PRIVATEKEY] },
   },
   gasReporter: {
     currency: 'USD',

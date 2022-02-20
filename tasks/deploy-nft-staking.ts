@@ -10,20 +10,23 @@ task('deploy:nft-staking', 'Deploy a SemaphoreStaking contract')
       const poseidonBytecode = poseidonContract.createCode(2)
 
       const [signer] = await ethers.getSigners()
-
+      const NFTFactory = await ethers.getContractFactory('stakingToken')
+      const nft = await NFTFactory.deploy('test token', 'test', 'testuri')
+      await nft.deployed()
+      console.log(`the nft staking address is ${nft.address}`)
       const PoseidonLibFactory = new ethers.ContractFactory(
         poseidonABI,
         poseidonBytecode,
         signer,
       )
+      console.log('first deploy')
       const poseidonLib = await PoseidonLibFactory.deploy()
-
+      console.log('deployed')
       await poseidonLib.deployed()
 
-      logs &&
-        console.log(
-          `Poseidon library has been deployed to: ${poseidonLib.address}`,
-        )
+      console.log(
+        `Poseidon library has been deployed to: ${poseidonLib.address}`,
+      )
 
       const IncrementalBinaryTreeLibFactory = await ethers.getContractFactory(
         'IncrementalBinaryTree',
@@ -37,27 +40,24 @@ task('deploy:nft-staking', 'Deploy a SemaphoreStaking contract')
 
       await incrementalBinaryTreeLib.deployed()
 
-      logs &&
-        console.log(
-          `IncrementalBinaryTree library has been deployed to: ${incrementalBinaryTreeLib.address}`,
-        )
+      console.log(
+        `IncrementalBinaryTree library has been deployed to: ${incrementalBinaryTreeLib.address}`,
+      )
 
       const ContractFactory = await ethers.getContractFactory('zkStake', {
         libraries: {
           IncrementalBinaryTree: incrementalBinaryTreeLib.address,
         },
       })
-      const NFTFactory = await ethers.getContractFactory('stakingToken')
+
       const contract = await ContractFactory.deploy()
-      const nft = await NFTFactory.deploy('test token', 'test', 'testuri')
-      await nft.deployed()
+
       await contract.deployed()
 
-      logs &&
-        console.log(
-          `SemaphoreStaking contract has been deployed to: ${contract.address}`,
-        )
-      console.log(`the nft staking address is ${nft.address}`)
+      console.log(
+        `SemaphoreStaking contract has been deployed to: ${contract.address}`,
+      )
+
       let call = await contract.createEntity(1, signer.address, nft.address)
       await call.wait()
       console.log('entity has been created via nft')
