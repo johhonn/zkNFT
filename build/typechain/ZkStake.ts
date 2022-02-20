@@ -26,7 +26,8 @@ export interface ZkStakeInterface extends utils.Interface {
     "getRoot(uint256)": FunctionFragment;
     "getSize(uint256)": FunctionFragment;
     "membershipTokens(uint256)": FunctionFragment;
-    "removeDAOIdentity(uint256,uint256,uint256[],uint8[])": FunctionFragment;
+    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+    "removeDAOIdentity(uint256,uint256,uint256[],uint8[],address)": FunctionFragment;
     "verifyIdentityChallenge(string,uint256,uint256,uint256[8])": FunctionFragment;
     "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])": FunctionFragment;
   };
@@ -56,8 +57,12 @@ export interface ZkStakeInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "onERC721Received",
+    values: [string, string, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "removeDAOIdentity",
-    values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
+    values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[], string]
   ): string;
   encodeFunctionData(
     functionFragment: "verifyIdentityChallenge",
@@ -86,6 +91,10 @@ export interface ZkStakeInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getSize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "membershipTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -214,11 +223,20 @@ export interface ZkStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     removeDAOIdentity(
       entityId: BigNumberish,
       identityCommitment: BigNumberish,
       proofSiblings: BigNumberish[],
       proofPathIndices: BigNumberish[],
+      receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -267,11 +285,20 @@ export interface ZkStake extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  onERC721Received(
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    arg3: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   removeDAOIdentity(
     entityId: BigNumberish,
     identityCommitment: BigNumberish,
     proofSiblings: BigNumberish[],
     proofPathIndices: BigNumberish[],
+    receiver: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -326,11 +353,20 @@ export interface ZkStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     removeDAOIdentity(
       entityId: BigNumberish,
       identityCommitment: BigNumberish,
       proofSiblings: BigNumberish[],
       proofPathIndices: BigNumberish[],
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -433,11 +469,20 @@ export interface ZkStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     removeDAOIdentity(
       entityId: BigNumberish,
       identityCommitment: BigNumberish,
       proofSiblings: BigNumberish[],
       proofPathIndices: BigNumberish[],
+      receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -493,11 +538,20 @@ export interface ZkStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     removeDAOIdentity(
       entityId: BigNumberish,
       identityCommitment: BigNumberish,
       proofSiblings: BigNumberish[],
       proofPathIndices: BigNumberish[],
+      receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

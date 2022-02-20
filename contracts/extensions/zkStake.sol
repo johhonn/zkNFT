@@ -6,11 +6,7 @@ import "../base/SemaphoreGroups.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 
-/// @title Semaphore whistleblowing contract.
-/// @dev The following code allows you to create entities for whistleblowers (e.g. non-profit
-/// organization, newspaper) and to allow them to publish news leaks anonymously.
-/// Leaks can be IPFS hashes, permanent links or other kinds of reference.
-contract zkStake is SemaphoreCore, SemaphoreGroups {
+contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
     /// @dev Gets an editor address and return their entity.
     mapping(address => uint256) private entities;
     mapping(uint256 => address) public membershipTokens;
@@ -57,7 +53,8 @@ contract zkStake is SemaphoreCore, SemaphoreGroups {
         uint256 entityId,
         uint256 identityCommitment,
         uint256[] calldata proofSiblings,
-        uint8[] calldata proofPathIndices
+        uint8[] calldata proofPathIndices,
+        address receiver
     ) public onlyEditor(entityId) {
         _removeMember(
             entityId,

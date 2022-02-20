@@ -1,7 +1,8 @@
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import '@openzeppelin/contracts/utils/Strings.sol';
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-contract MockERC721 is ERC721 {
+contract stakingToken is ERC721Enumerable {
     using Strings for string;
     string base;
     uint256 public totalTokensMinted;
