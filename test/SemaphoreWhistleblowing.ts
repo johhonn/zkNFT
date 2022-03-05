@@ -1,12 +1,12 @@
-import { Strategy, ZkIdentity } from "@zk-kit/identity"
-import { Semaphore } from "@zk-kit/protocols"
-import { expect } from "chai"
-import { Signer } from "ethers"
-import { ethers, run } from "hardhat"
-import { SemaphoreWhistleblowing } from "../build/typechain"
-import { createMerkleProof } from "./utils"
+import { Strategy, ZkIdentity } from '@zk-kit/identity'
+import { Semaphore } from '@zk-kit/protocols'
+import { expect } from 'chai'
+import { Signer } from 'ethers'
+import { ethers, run } from 'hardhat'
+import { SemaphoreWhistleblowing } from '../build/typechain'
+import { createMerkleProof } from './utils'
 
-describe("SemaphoreWhistleblowing", () => {
+describe('SemaphoreWhistleblowing', () => {
   let contract: SemaphoreWhistleblowing
   let accounts: Signer[]
   let editor: string
@@ -14,151 +14,228 @@ describe("SemaphoreWhistleblowing", () => {
   const entityIds = [BigInt(1), BigInt(2)]
 
   before(async () => {
-    contract = await run("deploy:semaphore-whistleblowing", { logs: false })
+    contract = await run('deploy:semaphore-whistleblowing', { logs: false })
     accounts = await ethers.getSigners()
     editor = await accounts[1].getAddress()
   })
 
-  describe("# createEntity", () => {
-    it("Should create an entity", async () => {
+  describe('# createEntity', () => {
+    it('Should create an entity', async () => {
       const transaction = contract.createEntity(entityIds[0], editor)
 
-      await expect(transaction).to.emit(contract, "EntityCreated").withArgs(entityIds[0], editor)
+      await expect(transaction)
+        .to.emit(contract, 'EntityCreated')
+        .withArgs(entityIds[0], editor)
     })
 
-    it("Should not create a entity if it already exists", async () => {
+    it('Should not create a entity if it already exists', async () => {
       const transaction = contract.createEntity(entityIds[0], editor)
 
-      await expect(transaction).to.be.revertedWith("SemaphoreGroups: group already exists")
+      await expect(transaction).to.be.revertedWith(
+        'SemaphoreGroups: group already exists',
+      )
     })
   })
 
-  describe("# addWhistleblower", () => {
-    it("Should not add a whistleblower if the caller is not the editor", async () => {
+  describe('# addWhistleblower', () => {
+    it('Should not add a whistleblower if the caller is not the editor', async () => {
       const identity = new ZkIdentity()
       const identityCommitment = identity.genIdentityCommitment()
 
-      const transaction = contract.addWhistleblower(entityIds[0], identityCommitment)
+      const transaction = contract.addWhistleblower(
+        entityIds[0],
+        identityCommitment,
+      )
 
-      await expect(transaction).to.be.revertedWith("SemaphoreWhistleblowing: caller is not the editor")
+      await expect(transaction).to.be.revertedWith(
+        'SemaphoreWhistleblowing: caller is not the editor',
+      )
     })
 
-    it("Should add a whistleblower to an existing entity", async () => {
-      const identity = new ZkIdentity(Strategy.MESSAGE, "test")
+    it('Should add a whistleblower to an existing entity', async () => {
+      const identity = new ZkIdentity(Strategy.MESSAGE, 'test')
       const identityCommitment = identity.genIdentityCommitment()
 
-      const transaction = contract.connect(accounts[1]).addWhistleblower(entityIds[0], identityCommitment)
+      const transaction = contract
+        .connect(accounts[1])
+        .addWhistleblower(entityIds[0], identityCommitment)
 
       await expect(transaction)
-        .to.emit(contract, "MemberAdded")
+        .to.emit(contract, 'MemberAdded')
         .withArgs(
           entityIds[0],
           identityCommitment,
-          "21535114724992190095497080437889044838904308549109546660414808669273607403748"
+          '21535114724992190095497080437889044838904308549109546660414808669273607403748',
         )
     })
 
-    it("Should return the correct number of whistleblowers of an entity", async () => {
+    it('Should return the correct number of whistleblowers of an entity', async () => {
       const size = await contract.getSize(entityIds[0])
 
       expect(size).to.be.eq(1)
     })
   })
 
-  describe("# removeWhistleblower", () => {
-    it("Should not remove a whistleblower if the caller is not the editor", async () => {
+  describe('# removeWhistleblower', () => {
+    it('Should not remove a whistleblower if the caller is not the editor', async () => {
       const identity = new ZkIdentity()
       const identityCommitment = identity.genIdentityCommitment()
-      const { siblings, pathIndices } = createMerkleProof([identityCommitment], identityCommitment)
+      const { siblings, pathIndices } = createMerkleProof(
+        [identityCommitment],
+        identityCommitment,
+      )
 
-      const transaction = contract.removeWhistleblower(entityIds[0], identityCommitment, siblings, pathIndices)
+      const transaction = contract.removeWhistleblower(
+        entityIds[0],
+        identityCommitment,
+        siblings,
+        pathIndices,
+      )
 
-      await expect(transaction).to.be.revertedWith("SemaphoreWhistleblowing: caller is not the editor")
+      await expect(transaction).to.be.revertedWith(
+        'SemaphoreWhistleblowing: caller is not the editor',
+      )
     })
 
-    it("Should romove a whistleblower from an existing entity", async () => {
-      const identity = new ZkIdentity(Strategy.MESSAGE, "test")
+    it('Should romove a whistleblower from an existing entity', async () => {
+      const identity = new ZkIdentity(Strategy.MESSAGE, 'test')
       const identityCommitment = identity.genIdentityCommitment()
-      const { siblings, pathIndices } = createMerkleProof([identityCommitment], identityCommitment)
+      const { siblings, pathIndices } = createMerkleProof(
+        [identityCommitment],
+        identityCommitment,
+      )
 
       const transaction = contract
         .connect(accounts[1])
-        .removeWhistleblower(entityIds[0], identityCommitment, siblings, pathIndices)
+        .removeWhistleblower(
+          entityIds[0],
+          identityCommitment,
+          siblings,
+          pathIndices,
+        )
 
       await expect(transaction)
-        .to.emit(contract, "MemberRemoved")
+        .to.emit(contract, 'MemberRemoved')
         .withArgs(
           entityIds[0],
           identityCommitment,
-          "11785348627339250291169543927799678775640354218526699257718426075004026330510"
+          '11785348627339250291169543927799678775640354218526699257718426075004026330510',
         )
     })
   })
 
-  describe("# publishLeak", () => {
-    const wasmFilePath = "./build/snark/semaphore.wasm"
-    const finalZkeyPath = "./build/snark/semaphore_final.zkey"
+  describe('# publishLeak', () => {
+    const wasmFilePath = './build/snark/semaphore.wasm'
+    const finalZkeyPath = './build/snark/semaphore_final.zkey'
 
-    const identity = new ZkIdentity(Strategy.MESSAGE, "test")
+    const identity = new ZkIdentity(Strategy.MESSAGE, 'test')
     const identityCommitment = identity.genIdentityCommitment()
-    const merkleProof = createMerkleProof([identityCommitment, BigInt(1)], identityCommitment)
-    const leak = "leak"
+    const identity2 = new ZkIdentity(Strategy.MESSAGE, 'test2')
+    const identityCommitment2 = identity.genIdentityCommitment()
+    const merkleProof = createMerkleProof(
+      [identityCommitment, BigInt(1), identityCommitment2],
+      identityCommitment,
+    )
+    const leak = 'leak'
 
     before(async () => {
       await contract.createEntity(entityIds[1], editor)
-      await contract.connect(accounts[1]).addWhistleblower(entityIds[1], identityCommitment)
-      await contract.connect(accounts[1]).addWhistleblower(entityIds[1], BigInt(1))
+      await contract
+        .connect(accounts[1])
+        .addWhistleblower(entityIds[1], identityCommitment)
+      await contract
+        .connect(accounts[1])
+        .addWhistleblower(entityIds[1], BigInt(1))
+      await contract
+        .connect(accounts[1])
+        .addWhistleblower(entityIds[1], identityCommitment2)
     })
 
-    it("Should not publish a leak if the caller is not the editor", async () => {
-      const nullifierHash = Semaphore.genNullifierHash(entityIds[0], identity.getNullifier())
+    it('Should not publish a leak if the caller is not the editor', async () => {
+      const nullifierHash = Semaphore.genNullifierHash(
+        entityIds[0],
+        identity.getNullifier(),
+      )
       const witness = Semaphore.genWitness(
         identity.getTrapdoor(),
         identity.getNullifier(),
         merkleProof,
         entityIds[0],
-        leak
+        leak,
       )
-      const fullProof = await Semaphore.genProof(witness, wasmFilePath, finalZkeyPath)
+      const fullProof = await Semaphore.genProof(
+        witness,
+        wasmFilePath,
+        finalZkeyPath,
+      )
       const solidityProof = Semaphore.packToSolidityProof(fullProof)
 
-      const transaction = contract.publishLeak(leak, nullifierHash, entityIds[0], solidityProof)
+      const transaction = contract.publishLeak(
+        leak,
+        nullifierHash,
+        entityIds[0],
+        solidityProof,
+      )
 
-      await expect(transaction).to.be.revertedWith("SemaphoreWhistleblowing: caller is not the editor")
+      await expect(transaction).to.be.revertedWith(
+        'SemaphoreWhistleblowing: caller is not the editor',
+      )
     })
 
-    it("Should not publish a leak if the proof is not valid", async () => {
-      const nullifierHash = Semaphore.genNullifierHash(entityIds[1], identity.getNullifier())
+    it('Should not publish a leak if the proof is not valid', async () => {
+      const nullifierHash = Semaphore.genNullifierHash(
+        entityIds[1],
+        identity.getNullifier(),
+      )
       const witness = Semaphore.genWitness(
         identity.getTrapdoor(),
         identity.getNullifier(),
         merkleProof,
         entityIds[0],
-        leak
+        leak,
       )
-      const fullProof = await Semaphore.genProof(witness, wasmFilePath, finalZkeyPath)
+      const fullProof = await Semaphore.genProof(
+        witness,
+        wasmFilePath,
+        finalZkeyPath,
+      )
       const solidityProof = Semaphore.packToSolidityProof(fullProof)
 
-      const transaction = contract.connect(accounts[1]).publishLeak(leak, nullifierHash, entityIds[1], solidityProof)
+      const transaction = contract
+        .connect(accounts[1])
+        .publishLeak(leak, nullifierHash, entityIds[1], solidityProof)
 
-      await expect(transaction).to.be.revertedWith("SemaphoreWhistleblowing: the proof is not valid")
+      await expect(transaction).to.be.revertedWith(
+        'SemaphoreWhistleblowing: the proof is not valid',
+      )
     })
 
-    it("Should publish a leak", async () => {
-      const nullifierHash = Semaphore.genNullifierHash(entityIds[1], identity.getNullifier())
+    it('Should publish a leak', async () => {
+      const nullifierHash = Semaphore.genNullifierHash(
+        entityIds[1],
+        identity.getNullifier(),
+      )
       const witness = Semaphore.genWitness(
         identity.getTrapdoor(),
         identity.getNullifier(),
         merkleProof,
         entityIds[1],
-        leak
+        leak,
       )
-      const fullProof = await Semaphore.genProof(witness, wasmFilePath, finalZkeyPath)
+      const fullProof = await Semaphore.genProof(
+        witness,
+        wasmFilePath,
+        finalZkeyPath,
+      )
       const solidityProof = Semaphore.packToSolidityProof(fullProof)
 
-      const transaction = contract.connect(accounts[1]).publishLeak(leak, nullifierHash, entityIds[1], solidityProof)
+      const transaction = contract
+        .connect(accounts[1])
+        .publishLeak(leak, nullifierHash, entityIds[1], solidityProof)
 
-      await expect(transaction).to.emit(contract, "LeakPublished").withArgs(entityIds[1], leak)
+      await expect(transaction)
+        .to.emit(contract, 'LeakPublished')
+        .withArgs(entityIds[1], leak)
     })
   })
 })
