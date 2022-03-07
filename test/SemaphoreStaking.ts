@@ -6,7 +6,7 @@ import { ethers, run } from 'hardhat'
 import { SemaphoreWhistleblowing } from '../build/typechain'
 import { createMerkleProof, generateIdentityProof } from './utils'
 
-describe('SemaphoreWhistleblowing', () => {
+describe('Semaphore Staking', () => {
   let stakecontract: any
   let NFT: any
   let accounts: any[]
