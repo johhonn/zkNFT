@@ -124,20 +124,20 @@ contract zkStake is
         if (entityTokenInterface[entityId] == STAKE_TYPE.ERC721) {
             IERC721(membershipTokens[entityId]).safeTransferFrom(
                 address(this),
-                msg.sender,
+                receiver,
                 commitmentNFTs[entityId]
             );
         } else if (entityTokenInterface[entityId] == STAKE_TYPE.ERC1155) {
             IERC1155(membershipTokens[entityId]).safeTransferFrom(
                 address(this),
-                msg.sender,
+                receiver,
                 commitmentNFTs[entityId],
                 stakeAmounts[entityId],
                 "0x00"
             );
         } else if (entityTokenInterface[entityId] == STAKE_TYPE.ERC20) {
             IERC20(membershipTokens[entityId]).safeTransferFrom(
-                msg.sender,
+                receiver,
                 address(this),
                 stakeAmounts[entityId]
             );
