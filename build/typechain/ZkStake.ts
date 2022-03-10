@@ -21,19 +21,14 @@ export interface ZkStakeInterface extends utils.Interface {
   contractName: "ZkStake";
   functions: {
     "addDAOIdentity(uint256,uint256,uint256)": FunctionFragment;
-    "commitIndex(uint256,uint256)": FunctionFragment;
     "commitmentNFTs(uint256)": FunctionFragment;
-    "commitments(uint256,uint256)": FunctionFragment;
-    "createEntity(uint256,address,address,uint8,uint256)": FunctionFragment;
-    "entityTokenInterface(uint256)": FunctionFragment;
+    "createEntity(uint256,address,address)": FunctionFragment;
     "getDepth(uint256)": FunctionFragment;
-    "getGroupCommitments(uint256)": FunctionFragment;
     "getRoot(uint256)": FunctionFragment;
     "getSize(uint256)": FunctionFragment;
     "membershipTokens(uint256)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "removeDAOIdentity(uint256,uint256,uint256[],uint8[],address)": FunctionFragment;
-    "stakeAmounts(uint256)": FunctionFragment;
     "verifyIdentityChallenge(string,uint256,uint256,uint256[8])": FunctionFragment;
     "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])": FunctionFragment;
   };
@@ -43,31 +38,15 @@ export interface ZkStakeInterface extends utils.Interface {
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "commitIndex",
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "commitmentNFTs",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "commitments",
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "createEntity",
-    values: [BigNumberish, string, string, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "entityTokenInterface",
-    values: [BigNumberish]
+    values: [BigNumberish, string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "getDepth",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getGroupCommitments",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -91,10 +70,6 @@ export interface ZkStakeInterface extends utils.Interface {
     values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[], string]
   ): string;
   encodeFunctionData(
-    functionFragment: "stakeAmounts",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "verifyIdentityChallenge",
     values: [string, BigNumberish, BigNumberish, BigNumberish[]]
   ): string;
@@ -113,30 +88,14 @@ export interface ZkStakeInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "commitIndex",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "commitmentNFTs",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "commitments",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "createEntity",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "entityTokenInterface",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "getDepth", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getGroupCommitments",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getSize", data: BytesLike): Result;
   decodeFunctionResult(
@@ -149,10 +108,6 @@ export interface ZkStakeInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "removeDAOIdentity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "stakeAmounts",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -250,20 +205,8 @@ export interface ZkStake extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    commitIndex(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     commitmentNFTs(
       arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    commitments(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -271,25 +214,13 @@ export interface ZkStake extends BaseContract {
       entityId: BigNumberish,
       editor: string,
       token: string,
-      option: BigNumberish,
-      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    entityTokenInterface(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[number]>;
 
     getDepth(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    getGroupCommitments(
-      g: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]]>;
 
     getRoot(
       groupId: BigNumberish,
@@ -323,11 +254,6 @@ export interface ZkStake extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    stakeAmounts(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     verifyIdentityChallenge(
       challenge: string,
       nullifierHash: BigNumberish,
@@ -352,20 +278,8 @@ export interface ZkStake extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  commitIndex(
-    arg0: BigNumberish,
-    arg1: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   commitmentNFTs(
     arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  commitments(
-    arg0: BigNumberish,
-    arg1: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -373,25 +287,13 @@ export interface ZkStake extends BaseContract {
     entityId: BigNumberish,
     editor: string,
     token: string,
-    option: BigNumberish,
-    value: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  entityTokenInterface(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<number>;
 
   getDepth(
     groupId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  getGroupCommitments(
-    g: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
 
   getRoot(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -419,11 +321,6 @@ export interface ZkStake extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  stakeAmounts(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   verifyIdentityChallenge(
     challenge: string,
     nullifierHash: BigNumberish,
@@ -448,20 +345,8 @@ export interface ZkStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    commitIndex(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     commitmentNFTs(
       arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    commitments(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -469,25 +354,13 @@ export interface ZkStake extends BaseContract {
       entityId: BigNumberish,
       editor: string,
       token: string,
-      option: BigNumberish,
-      value: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    entityTokenInterface(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<number>;
 
     getDepth(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    getGroupCommitments(
-      g: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
 
     getRoot(
       groupId: BigNumberish,
@@ -520,11 +393,6 @@ export interface ZkStake extends BaseContract {
       receiver: string,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    stakeAmounts(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     verifyIdentityChallenge(
       challenge: string,
@@ -598,20 +466,8 @@ export interface ZkStake extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    commitIndex(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     commitmentNFTs(
       arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    commitments(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -619,23 +475,11 @@ export interface ZkStake extends BaseContract {
       entityId: BigNumberish,
       editor: string,
       token: string,
-      option: BigNumberish,
-      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    entityTokenInterface(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getDepth(
       groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getGroupCommitments(
-      g: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -669,11 +513,6 @@ export interface ZkStake extends BaseContract {
       proofPathIndices: BigNumberish[],
       receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    stakeAmounts(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     verifyIdentityChallenge(
@@ -701,20 +540,8 @@ export interface ZkStake extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    commitIndex(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     commitmentNFTs(
       arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    commitments(
-      arg0: BigNumberish,
-      arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -722,23 +549,11 @@ export interface ZkStake extends BaseContract {
       entityId: BigNumberish,
       editor: string,
       token: string,
-      option: BigNumberish,
-      value: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    entityTokenInterface(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getDepth(
       groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getGroupCommitments(
-      g: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -772,11 +587,6 @@ export interface ZkStake extends BaseContract {
       proofPathIndices: BigNumberish[],
       receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    stakeAmounts(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     verifyIdentityChallenge(

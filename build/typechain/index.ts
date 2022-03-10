@@ -2,6 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { IERC1155 } from "./IERC1155";
+export type { IERC1155Receiver } from "./IERC1155Receiver";
+export type { ERC1155Holder } from "./ERC1155Holder";
+export type { ERC1155Receiver } from "./ERC1155Receiver";
 export type { IERC20 } from "./IERC20";
 export type { ERC721 } from "./ERC721";
 export type { ERC721Enumerable } from "./ERC721Enumerable";
@@ -19,7 +22,9 @@ export type { SemaphoreGroups } from "./SemaphoreGroups";
 export type { Verifier } from "./Verifier";
 export type { SemaphoreVoting } from "./SemaphoreVoting";
 export type { SemaphoreWhistleblowing } from "./SemaphoreWhistleblowing";
+export type { TestStake } from "./TestStake";
 export type { ZkStake } from "./ZkStake";
+export type { ZkStakeV2 } from "./ZkStakeV2";
 export type { ISemaphoreCore } from "./ISemaphoreCore";
 export type { ISemaphoreGroups } from "./ISemaphoreGroups";
 export type { ISemaphoreNullifiers } from "./ISemaphoreNullifiers";
@@ -29,6 +34,9 @@ export type { MockERC721 } from "./MockERC721";
 export type { StakingToken } from "./StakingToken";
 
 export { IERC1155__factory } from "./factories/IERC1155__factory";
+export { IERC1155Receiver__factory } from "./factories/IERC1155Receiver__factory";
+export { ERC1155Holder__factory } from "./factories/ERC1155Holder__factory";
+export { ERC1155Receiver__factory } from "./factories/ERC1155Receiver__factory";
 export { IERC20__factory } from "./factories/IERC20__factory";
 export { ERC721__factory } from "./factories/ERC721__factory";
 export { ERC721Enumerable__factory } from "./factories/ERC721Enumerable__factory";
@@ -46,7 +54,9 @@ export { SemaphoreGroups__factory } from "./factories/SemaphoreGroups__factory";
 export { Verifier__factory } from "./factories/Verifier__factory";
 export { SemaphoreVoting__factory } from "./factories/SemaphoreVoting__factory";
 export { SemaphoreWhistleblowing__factory } from "./factories/SemaphoreWhistleblowing__factory";
+export { TestStake__factory } from "./factories/TestStake__factory";
 export { ZkStake__factory } from "./factories/ZkStake__factory";
+export { ZkStakeV2__factory } from "./factories/ZkStakeV2__factory";
 export { ISemaphoreCore__factory } from "./factories/ISemaphoreCore__factory";
 export { ISemaphoreGroups__factory } from "./factories/ISemaphoreGroups__factory";
 export { ISemaphoreNullifiers__factory } from "./factories/ISemaphoreNullifiers__factory";

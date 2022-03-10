@@ -75,10 +75,14 @@ export async function generateIdentityProofasHex(
   const solidityProof = Semaphore.packToSolidityProof(fullProof)
   const params = {
     proof: solidityProof,
-    nullifierHash: nullifierHash,
+    nullifierHash: nullifierHash.toString(),
     entityId: groupId,
     challenge: challenge,
   }
-  const hexified = new Buffer.from(JSON.stringify(params)).toString('hex')
-  return hexified
+
+  console.log(params)
+  const hexified = new (Buffer as any).from(JSON.stringify(params)).toString(
+    'hex',
+  )
+  return `0x${hexified}`
 }

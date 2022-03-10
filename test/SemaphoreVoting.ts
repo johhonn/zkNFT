@@ -98,7 +98,7 @@ describe('SemaphoreVoting', () => {
       )
     })
 
-    it.only('Should add a a bunch of voters to an existing poll', async () => {
+    /**it('Should add a a bunch of voters to an existing poll', async () => {
       for (let i = 0; i < 100; i++) {
         let identity = new ZkIdentity(Strategy.MESSAGE, 'test')
         let identityCommitment = identity.genIdentityCommitment()
@@ -109,6 +109,7 @@ describe('SemaphoreVoting', () => {
       }
       console.log(await contract.getSize(pollIds[1]))
     })
+    **/
     it('Should add a voter to an existing poll', async () => {
       const identity = new ZkIdentity(Strategy.MESSAGE, 'test')
       const identityCommitment = identity.genIdentityCommitment()

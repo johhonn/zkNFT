@@ -10,7 +10,9 @@ import { config } from './package.json'
 import './tasks/deploy-semaphore-voting'
 import './tasks/deploy-semaphore-whistleblowing'
 import './tasks/deploy-nft-staking'
+import './tasks/deploy-test-staking'
 import './tasks/register-Identity'
+import './tasks/generate-proof'
 dotenvConfig({ path: resolve(__dirname, './.env') })
 let PRIVATEKEY =
   process.env.PRIVATEKEY ||

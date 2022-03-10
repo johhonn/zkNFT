@@ -17,6 +17,18 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC1155__factory>;
     getContractFactory(
+      name: "IERC1155Receiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC1155Receiver__factory>;
+    getContractFactory(
+      name: "ERC1155Holder",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC1155Holder__factory>;
+    getContractFactory(
+      name: "ERC1155Receiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC1155Receiver__factory>;
+    getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
@@ -85,9 +97,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SemaphoreWhistleblowing__factory>;
     getContractFactory(
+      name: "TestStake",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TestStake__factory>;
+    getContractFactory(
       name: "ZkStake",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ZkStake__factory>;
+    getContractFactory(
+      name: "ZkStakeV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZkStakeV2__factory>;
     getContractFactory(
       name: "ISemaphoreCore",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -122,6 +142,21 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC1155>;
+    getContractAt(
+      name: "IERC1155Receiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC1155Receiver>;
+    getContractAt(
+      name: "ERC1155Holder",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC1155Holder>;
+    getContractAt(
+      name: "ERC1155Receiver",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC1155Receiver>;
     getContractAt(
       name: "IERC20",
       address: string,
@@ -208,10 +243,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SemaphoreWhistleblowing>;
     getContractAt(
+      name: "TestStake",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestStake>;
+    getContractAt(
       name: "ZkStake",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ZkStake>;
+    getContractAt(
+      name: "ZkStakeV2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZkStakeV2>;
     getContractAt(
       name: "ISemaphoreCore",
       address: string,
