@@ -49,7 +49,7 @@ task('deploy:nft-staking', 'Deploy a SemaphoreStaking contract')
       })
       const NFTFactory = await ethers.getContractFactory('stakingToken')
       const contract = await ContractFactory.deploy()
-      const nft = await NFTFactory.deploy('test token', 'test', 'testuri')
+      const nft = await NFTFactory.deploy('accessToken', 'AT', 'testuri')
       await nft.deployed()
       await contract.deployed()
 

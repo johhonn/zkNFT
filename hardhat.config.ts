@@ -13,7 +13,7 @@ import './tasks/deploy-nft-staking'
 dotenvConfig({ path: resolve(__dirname, './.env') })
 let PRIVATEKEY =
   process.env.PRIVATEKEY ||
-  '0x0000000000000000000000000000000000000000000000000000000000000001'
+  '0x0000000000000000000000000000000000000000000000000000000000000000'
 const hardhatConfig: HardhatUserConfig = {
   solidity: config.solidity,
   paths: {
@@ -24,7 +24,7 @@ const hardhatConfig: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
-      chainId: 1337,
+      chainId: 588,
       allowUnlimitedContractSize: true,
     },
     localhost: {
@@ -36,6 +36,12 @@ const hardhatConfig: HardhatUserConfig = {
       accounts: [PRIVATEKEY],
       gasPrice: 30000000,
       gas: 3000000,
+    },
+    metis: {
+      url: `https://stardust.metis.io/?owner=588`,
+      accounts: [PRIVATEKEY]
+      // gasPrice: 30000000,
+      // gas: 3000000,
     },
   },
   gasReporter: {
