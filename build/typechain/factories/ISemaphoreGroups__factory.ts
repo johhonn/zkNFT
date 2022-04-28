@@ -25,8 +25,14 @@ const _abi = [
         name: "depth",
         type: "uint8",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "zeroValue",
+        type: "uint256",
+      },
     ],
-    name: "GroupAdded",
+    name: "GroupCreated",
     type: "event",
   },
   {
@@ -90,9 +96,9 @@ const _abi = [
     name: "getDepth",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "uint8",
         name: "",
-        type: "uint256",
+        type: "uint8",
       },
     ],
     stateMutability: "view",
@@ -106,7 +112,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "getRoot",
+    name: "getNumberOfLeaves",
     outputs: [
       {
         internalType: "uint256",
@@ -125,7 +131,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "getSize",
+    name: "getRoot",
     outputs: [
       {
         internalType: "uint256",

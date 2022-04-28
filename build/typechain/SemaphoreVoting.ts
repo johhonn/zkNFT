@@ -21,14 +21,13 @@ export interface SemaphoreVotingInterface extends utils.Interface {
   contractName: "SemaphoreVoting";
   functions: {
     "addVoter(uint256,uint256)": FunctionFragment;
-    "castVote(string,uint256,uint256,uint256[8])": FunctionFragment;
-    "createPoll(uint256,address)": FunctionFragment;
+    "castVote(bytes32,uint256,uint256,uint256[8])": FunctionFragment;
+    "createPoll(uint256,address,uint8)": FunctionFragment;
     "endPoll(uint256,uint256)": FunctionFragment;
     "getDepth(uint256)": FunctionFragment;
+    "getNumberOfLeaves(uint256)": FunctionFragment;
     "getRoot(uint256)": FunctionFragment;
-    "getSize(uint256)": FunctionFragment;
     "startPoll(uint256,uint256)": FunctionFragment;
-    "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -37,11 +36,11 @@ export interface SemaphoreVotingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "castVote",
-    values: [string, BigNumberish, BigNumberish, BigNumberish[]]
+    values: [BytesLike, BigNumberish, BigNumberish, BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "createPoll",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "endPoll",
@@ -52,25 +51,16 @@ export interface SemaphoreVotingInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getRoot",
+    functionFragment: "getNumberOfLeaves",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getSize",
+    functionFragment: "getRoot",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "startPoll",
     values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "verifyProof",
-    values: [
-      [BigNumberish, BigNumberish],
-      [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      [BigNumberish, BigNumberish],
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
-    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "addVoter", data: BytesLike): Result;
@@ -78,26 +68,25 @@ export interface SemaphoreVotingInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "createPoll", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "endPoll", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getDepth", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getSize", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "startPoll", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "verifyProof",
+    functionFragment: "getNumberOfLeaves",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "startPoll", data: BytesLike): Result;
 
   events: {
-    "GroupAdded(uint256,uint8)": EventFragment;
+    "GroupCreated(uint256,uint8,uint256)": EventFragment;
     "MemberAdded(uint256,uint256,uint256)": EventFragment;
     "MemberRemoved(uint256,uint256,uint256)": EventFragment;
     "NullifierHashAdded(uint256)": EventFragment;
     "PollCreated(uint256,address)": EventFragment;
     "PollEnded(uint256,address,uint256)": EventFragment;
     "PollStarted(uint256,address,uint256)": EventFragment;
-    "VoteAdded(uint256,string)": EventFragment;
+    "VoteAdded(uint256,bytes32)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "GroupAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "GroupCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberAdded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NullifierHashAdded"): EventFragment;
@@ -107,12 +96,12 @@ export interface SemaphoreVotingInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "VoteAdded"): EventFragment;
 }
 
-export type GroupAddedEvent = TypedEvent<
-  [BigNumber, number],
-  { groupId: BigNumber; depth: number }
+export type GroupCreatedEvent = TypedEvent<
+  [BigNumber, number, BigNumber],
+  { groupId: BigNumber; depth: number; zeroValue: BigNumber }
 >;
 
-export type GroupAddedEventFilter = TypedEventFilter<GroupAddedEvent>;
+export type GroupCreatedEventFilter = TypedEventFilter<GroupCreatedEvent>;
 
 export type MemberAddedEvent = TypedEvent<
   [BigNumber, BigNumber, BigNumber],
@@ -199,7 +188,7 @@ export interface SemaphoreVoting extends BaseContract {
     ): Promise<ContractTransaction>;
 
     castVote(
-      vote: string,
+      vote: BytesLike,
       nullifierHash: BigNumberish,
       pollId: BigNumberish,
       proof: BigNumberish[],
@@ -209,6 +198,7 @@ export interface SemaphoreVoting extends BaseContract {
     createPoll(
       pollId: BigNumberish,
       coordinator: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -221,14 +211,14 @@ export interface SemaphoreVoting extends BaseContract {
     getDepth(
       groupId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[number]>;
 
-    getRoot(
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    getSize(
+    getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -238,14 +228,6 @@ export interface SemaphoreVoting extends BaseContract {
       encryptionKey: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { r: boolean }>;
   };
 
   addVoter(
@@ -255,7 +237,7 @@ export interface SemaphoreVoting extends BaseContract {
   ): Promise<ContractTransaction>;
 
   castVote(
-    vote: string,
+    vote: BytesLike,
     nullifierHash: BigNumberish,
     pollId: BigNumberish,
     proof: BigNumberish[],
@@ -265,6 +247,7 @@ export interface SemaphoreVoting extends BaseContract {
   createPoll(
     pollId: BigNumberish,
     coordinator: string,
+    depth: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -274,28 +257,20 @@ export interface SemaphoreVoting extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getDepth(
+  getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+  getNumberOfLeaves(
     groupId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getRoot(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getSize(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
   startPoll(
     pollId: BigNumberish,
     encryptionKey: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  verifyProof(
-    a: [BigNumberish, BigNumberish],
-    b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-    c: [BigNumberish, BigNumberish],
-    input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   callStatic: {
     addVoter(
@@ -305,7 +280,7 @@ export interface SemaphoreVoting extends BaseContract {
     ): Promise<void>;
 
     castVote(
-      vote: string,
+      vote: BytesLike,
       nullifierHash: BigNumberish,
       pollId: BigNumberish,
       proof: BigNumberish[],
@@ -315,6 +290,7 @@ export interface SemaphoreVoting extends BaseContract {
     createPoll(
       pollId: BigNumberish,
       coordinator: string,
+      depth: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -324,7 +300,9 @@ export interface SemaphoreVoting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getDepth(
+    getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -334,35 +312,24 @@ export interface SemaphoreVoting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     startPoll(
       pollId: BigNumberish,
       encryptionKey: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
-    ): Promise<boolean>;
   };
 
   filters: {
-    "GroupAdded(uint256,uint8)"(
+    "GroupCreated(uint256,uint8,uint256)"(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
-    GroupAdded(
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
+    GroupCreated(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
       groupId?: BigNumberish | null,
@@ -422,7 +389,7 @@ export interface SemaphoreVoting extends BaseContract {
       encryptionKey?: null
     ): PollStartedEventFilter;
 
-    "VoteAdded(uint256,string)"(
+    "VoteAdded(uint256,bytes32)"(
       pollId?: BigNumberish | null,
       vote?: null
     ): VoteAddedEventFilter;
@@ -437,7 +404,7 @@ export interface SemaphoreVoting extends BaseContract {
     ): Promise<BigNumber>;
 
     castVote(
-      vote: string,
+      vote: BytesLike,
       nullifierHash: BigNumberish,
       pollId: BigNumberish,
       proof: BigNumberish[],
@@ -447,6 +414,7 @@ export interface SemaphoreVoting extends BaseContract {
     createPoll(
       pollId: BigNumberish,
       coordinator: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -461,12 +429,12 @@ export interface SemaphoreVoting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getRoot(
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSize(
+    getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -475,14 +443,6 @@ export interface SemaphoreVoting extends BaseContract {
       pollId: BigNumberish,
       encryptionKey: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
@@ -494,7 +454,7 @@ export interface SemaphoreVoting extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     castVote(
-      vote: string,
+      vote: BytesLike,
       nullifierHash: BigNumberish,
       pollId: BigNumberish,
       proof: BigNumberish[],
@@ -504,6 +464,7 @@ export interface SemaphoreVoting extends BaseContract {
     createPoll(
       pollId: BigNumberish,
       coordinator: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -518,12 +479,12 @@ export interface SemaphoreVoting extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getRoot(
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getSize(
+    getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -532,14 +493,6 @@ export interface SemaphoreVoting extends BaseContract {
       pollId: BigNumberish,
       encryptionKey: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

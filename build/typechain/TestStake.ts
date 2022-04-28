@@ -24,13 +24,12 @@ export interface TestStakeInterface extends utils.Interface {
     "commitments(uint256,uint256)": FunctionFragment;
     "createEntity(uint256,address)": FunctionFragment;
     "getDepth(uint256)": FunctionFragment;
+    "getEncodedChallenge(string)": FunctionFragment;
     "getGroupCommitments(uint256)": FunctionFragment;
+    "getNumberOfLeaves(uint256)": FunctionFragment;
     "getRoot(uint256)": FunctionFragment;
-    "getSize(uint256)": FunctionFragment;
-    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "removeDAOIdentity(uint256,uint256,uint256[],uint8[])": FunctionFragment;
-    "verifyIdentityChallenge(string,uint256,uint256,uint256[8])": FunctionFragment;
-    "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])": FunctionFragment;
+    "verifyIdentityChallenge(bytes32,uint256,uint256,uint256[8])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -50,7 +49,15 @@ export interface TestStakeInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "getEncodedChallenge",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getGroupCommitments",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNumberOfLeaves",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -58,29 +65,12 @@ export interface TestStakeInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getSize",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "onERC721Received",
-    values: [string, string, BigNumberish, BytesLike]
-  ): string;
-  encodeFunctionData(
     functionFragment: "removeDAOIdentity",
     values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "verifyIdentityChallenge",
-    values: [string, BigNumberish, BigNumberish, BigNumberish[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "verifyProof",
-    values: [
-      [BigNumberish, BigNumberish],
-      [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      [BigNumberish, BigNumberish],
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
-    ]
+    values: [BytesLike, BigNumberish, BigNumberish, BigNumberish[]]
   ): string;
 
   decodeFunctionResult(
@@ -97,15 +87,18 @@ export interface TestStakeInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "getDepth", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "getEncodedChallenge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getGroupCommitments",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getSize", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "onERC721Received",
+    functionFragment: "getNumberOfLeaves",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeDAOIdentity",
     data: BytesLike
@@ -114,21 +107,17 @@ export interface TestStakeInterface extends utils.Interface {
     functionFragment: "verifyIdentityChallenge",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "verifyProof",
-    data: BytesLike
-  ): Result;
 
   events: {
     "EntityCreated(uint256,address)": EventFragment;
-    "GroupAdded(uint256,uint8)": EventFragment;
+    "GroupCreated(uint256,uint8,uint256)": EventFragment;
     "MemberAdded(uint256,uint256,uint256)": EventFragment;
     "MemberRemoved(uint256,uint256,uint256)": EventFragment;
     "NullifierHashAdded(uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "EntityCreated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "GroupAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "GroupCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberAdded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NullifierHashAdded"): EventFragment;
@@ -141,12 +130,12 @@ export type EntityCreatedEvent = TypedEvent<
 
 export type EntityCreatedEventFilter = TypedEventFilter<EntityCreatedEvent>;
 
-export type GroupAddedEvent = TypedEvent<
-  [BigNumber, number],
-  { groupId: BigNumber; depth: number }
+export type GroupCreatedEvent = TypedEvent<
+  [BigNumber, number, BigNumber],
+  { groupId: BigNumber; depth: number; zeroValue: BigNumber }
 >;
 
-export type GroupAddedEventFilter = TypedEventFilter<GroupAddedEvent>;
+export type GroupCreatedEventFilter = TypedEventFilter<GroupCreatedEvent>;
 
 export type MemberAddedEvent = TypedEvent<
   [BigNumber, BigNumber, BigNumber],
@@ -219,30 +208,27 @@ export interface TestStake extends BaseContract {
     getDepth(
       groupId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[number]>;
+
+    getEncodedChallenge(
+      challenge: string,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     getGroupCommitments(
       g: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
+    getNumberOfLeaves(
+      groupId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     removeDAOIdentity(
       entityId: BigNumberish,
@@ -253,20 +239,12 @@ export interface TestStake extends BaseContract {
     ): Promise<ContractTransaction>;
 
     verifyIdentityChallenge(
-      challenge: string,
+      challenge: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { r: boolean }>;
   };
 
   addDAOIdentity(
@@ -287,27 +265,24 @@ export interface TestStake extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getDepth(
-    groupId: BigNumberish,
+  getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+  getEncodedChallenge(
+    challenge: string,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<string>;
 
   getGroupCommitments(
     g: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
+  getNumberOfLeaves(
+    groupId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   getRoot(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-  getSize(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-  onERC721Received(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish,
-    arg3: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   removeDAOIdentity(
     entityId: BigNumberish,
@@ -318,18 +293,10 @@ export interface TestStake extends BaseContract {
   ): Promise<ContractTransaction>;
 
   verifyIdentityChallenge(
-    challenge: string,
+    challenge: BytesLike,
     nullifierHash: BigNumberish,
     entityId: BigNumberish,
     proof: BigNumberish[],
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  verifyProof(
-    a: [BigNumberish, BigNumberish],
-    b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-    c: [BigNumberish, BigNumberish],
-    input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -352,33 +319,27 @@ export interface TestStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getDepth(
-      groupId: BigNumberish,
+    getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+    getEncodedChallenge(
+      challenge: string,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<string>;
 
     getGroupCommitments(
       g: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
+    getNumberOfLeaves(
+      groupId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     removeDAOIdentity(
       entityId: BigNumberish,
@@ -389,18 +350,10 @@ export interface TestStake extends BaseContract {
     ): Promise<void>;
 
     verifyIdentityChallenge(
-      challenge: string,
+      challenge: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
@@ -415,14 +368,16 @@ export interface TestStake extends BaseContract {
       editor?: string | null
     ): EntityCreatedEventFilter;
 
-    "GroupAdded(uint256,uint8)"(
+    "GroupCreated(uint256,uint8,uint256)"(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
-    GroupAdded(
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
+    GroupCreated(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
       groupId?: BigNumberish | null,
@@ -476,27 +431,24 @@ export interface TestStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getEncodedChallenge(
+      challenge: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getGroupCommitments(
       g: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getNumberOfLeaves(
+      groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     removeDAOIdentity(
@@ -508,18 +460,10 @@ export interface TestStake extends BaseContract {
     ): Promise<BigNumber>;
 
     verifyIdentityChallenge(
-      challenge: string,
+      challenge: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -548,27 +492,24 @@ export interface TestStake extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getEncodedChallenge(
+      challenge: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getGroupCommitments(
       g: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getNumberOfLeaves(
+      groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     removeDAOIdentity(
@@ -580,18 +521,10 @@ export interface TestStake extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     verifyIdentityChallenge(
-      challenge: string,
+      challenge: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

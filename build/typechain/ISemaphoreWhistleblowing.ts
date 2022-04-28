@@ -21,8 +21,8 @@ export interface ISemaphoreWhistleblowingInterface extends utils.Interface {
   contractName: "ISemaphoreWhistleblowing";
   functions: {
     "addWhistleblower(uint256,uint256)": FunctionFragment;
-    "createEntity(uint256,address)": FunctionFragment;
-    "publishLeak(string,uint256,uint256,uint256[8])": FunctionFragment;
+    "createEntity(uint256,address,uint8)": FunctionFragment;
+    "publishLeak(bytes32,uint256,uint256,uint256[8])": FunctionFragment;
     "removeWhistleblower(uint256,uint256,uint256[],uint8[])": FunctionFragment;
   };
 
@@ -32,11 +32,11 @@ export interface ISemaphoreWhistleblowingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createEntity",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "publishLeak",
-    values: [string, BigNumberish, BigNumberish, BigNumberish[]]
+    values: [BytesLike, BigNumberish, BigNumberish, BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "removeWhistleblower",
@@ -62,7 +62,7 @@ export interface ISemaphoreWhistleblowingInterface extends utils.Interface {
 
   events: {
     "EntityCreated(uint256,address)": EventFragment;
-    "LeakPublished(uint256,string)": EventFragment;
+    "LeakPublished(uint256,bytes32)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "EntityCreated"): EventFragment;
@@ -120,11 +120,12 @@ export interface ISemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -149,11 +150,12 @@ export interface ISemaphoreWhistleblowing extends BaseContract {
   createEntity(
     entityId: BigNumberish,
     editor: string,
+    depth: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   publishLeak(
-    leak: string,
+    leak: BytesLike,
     nullifierHash: BigNumberish,
     entityId: BigNumberish,
     proof: BigNumberish[],
@@ -178,11 +180,12 @@ export interface ISemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -208,7 +211,7 @@ export interface ISemaphoreWhistleblowing extends BaseContract {
       editor?: string | null
     ): EntityCreatedEventFilter;
 
-    "LeakPublished(uint256,string)"(
+    "LeakPublished(uint256,bytes32)"(
       entityId?: BigNumberish | null,
       leak?: null
     ): LeakPublishedEventFilter;
@@ -228,11 +231,12 @@ export interface ISemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -258,11 +262,12 @@ export interface ISemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],

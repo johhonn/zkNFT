@@ -90,9 +90,9 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "string",
+        internalType: "bytes32",
         name: "vote",
-        type: "string",
+        type: "bytes32",
       },
     ],
     name: "VoteAdded",
@@ -119,9 +119,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "string",
+        internalType: "bytes32",
         name: "vote",
-        type: "string",
+        type: "bytes32",
       },
       {
         internalType: "uint256",
@@ -156,6 +156,11 @@ const _abi = [
         name: "coordinator",
         type: "address",
       },
+      {
+        internalType: "uint8",
+        name: "depth",
+        type: "uint8",
+      },
     ],
     name: "createPoll",
     outputs: [],
@@ -189,7 +194,7 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "decryptionKey",
+        name: "encryptionKey",
         type: "uint256",
       },
     ],

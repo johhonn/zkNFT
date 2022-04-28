@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: GPL-3.0
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
 /// @title SemaphoreGroups interface.
@@ -7,7 +7,8 @@ interface ISemaphoreGroups {
   /// @dev Emitted when a new group is created.
   /// @param groupId: Id of the group.
   /// @param depth: Depth of the tree.
-  event GroupAdded(uint256 indexed groupId, uint8 depth);
+  /// @param zeroValue: Zero value of the tree.
+  event GroupCreated(uint256 indexed groupId, uint8 depth, uint256 zeroValue);
 
   /// @dev Emitted when a new identity commitment is added.
   /// @param groupId: Group id of the group.
@@ -29,10 +30,10 @@ interface ISemaphoreGroups {
   /// @dev Returns the depth of the tree of a group.
   /// @param groupId: Id of the group.
   /// @return Depth of the group tree.
-  function getDepth(uint256 groupId) external view returns (uint256);
+  function getDepth(uint256 groupId) external view returns (uint8);
 
-  /// @dev Returns the number of members of a group.
+  /// @dev Returns the number of tree leaves of a group.
   /// @param groupId: Id of the group.
-  /// @return Size of the group.
-  function getSize(uint256 groupId) external view returns (uint256);
+  /// @return Number of tree leaves.
+  function getNumberOfLeaves(uint256 groupId) external view returns (uint256);
 }

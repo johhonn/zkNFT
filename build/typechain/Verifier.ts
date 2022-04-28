@@ -73,7 +73,7 @@ export interface Verifier extends BaseContract {
       c: [BigNumberish, BigNumberish],
       input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
-    ): Promise<[boolean] & { r: boolean }>;
+    ): Promise<[void]>;
   };
 
   verifyProof(
@@ -82,7 +82,7 @@ export interface Verifier extends BaseContract {
     c: [BigNumberish, BigNumberish],
     input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<void>;
 
   callStatic: {
     verifyProof(
@@ -91,7 +91,7 @@ export interface Verifier extends BaseContract {
       c: [BigNumberish, BigNumberish],
       input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<void>;
   };
 
   filters: {};

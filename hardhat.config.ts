@@ -12,6 +12,7 @@ import './tasks/deploy-semaphore-whistleblowing'
 import './tasks/deploy-nft-staking'
 import './tasks/deploy-test-staking'
 import './tasks/register-Identity'
+import './tasks/register-nft-identity'
 import './tasks/generate-proof'
 dotenvConfig({ path: resolve(__dirname, './.env') })
 let PRIVATEKEY =

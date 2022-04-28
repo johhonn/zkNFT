@@ -1,9 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/base/SemaphoreConstants.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "55f4495d18b634bc9bcf9ded2ce35059",
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/base/SemaphoreConstants.sol": {
+      "lastModificationDate": 1651109687520,
+      "contentHash": "caba466e18c3dd31e4b888dc74e2665b",
       "sourceName": "contracts/base/SemaphoreConstants.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -34,9 +34,9 @@
       ],
       "artifacts": []
     },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/base/SemaphoreGroups.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "348ae6ec8e4130f404a03ad08602d714",
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/base/SemaphoreGroups.sol": {
+      "lastModificationDate": 1651109687540,
+      "contentHash": "f5a2b51fcfa10ee5c8cd712e0495b112",
       "sourceName": "contracts/base/SemaphoreGroups.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -74,9 +74,9 @@
         "SemaphoreGroups"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/interfaces/ISemaphoreGroups.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "15ff26dd3a8789e2248df7a8e1708939",
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/interfaces/ISemaphoreGroups.sol": {
+      "lastModificationDate": 1651110660850,
+      "contentHash": "e74ce178fc610e1c341f070ec4d998ba",
       "sourceName": "contracts/interfaces/ISemaphoreGroups.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -109,515 +109,8 @@
         "ISemaphoreGroups"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/extensions/SemaphoreWhistleblowing.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "b678642e57f2b36f10cb1a04401f6736",
-      "sourceName": "contracts/extensions/SemaphoreWhistleblowing.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../interfaces/ISemaphoreWhistleblowing.sol",
-        "../base/SemaphoreCore.sol",
-        "../base/SemaphoreGroups.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreWhistleblowing"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/interfaces/ISemaphoreWhistleblowing.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "2bde9aec7168eba9ca9d6de2b61ed4ec",
-      "sourceName": "contracts/interfaces/ISemaphoreWhistleblowing.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreWhistleblowing"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/base/SemaphoreCore.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "0e1d5e4194031c17acc77f61c6fb0c39",
-      "sourceName": "contracts/base/SemaphoreCore.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../interfaces/ISemaphoreCore.sol",
-        "./Verifier.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreCore"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/interfaces/ISemaphoreCore.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "8220350a4343ee276244ef335ad85260",
-      "sourceName": "contracts/interfaces/ISemaphoreCore.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreCore"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/base/Verifier.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "24402ffba0b43768dc1573f2d16a7c86",
-      "sourceName": "contracts/base/Verifier.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Pairing",
-        "Verifier"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/extensions/SemaphoreVoting.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "e4723cec3b078c15c968f6c497446b91",
-      "sourceName": "contracts/extensions/SemaphoreVoting.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../interfaces/ISemaphoreVoting.sol",
-        "../base/SemaphoreCore.sol",
-        "../base/SemaphoreGroups.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreVoting"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/interfaces/ISemaphoreVoting.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "06b1ddda005d68815a86bd49c3ee9c4e",
-      "sourceName": "contracts/interfaces/ISemaphoreVoting.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreVoting"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/interfaces/ISemaphoreNullifiers.sol": {
-      "lastModificationDate": 1645136531169,
-      "contentHash": "e88cdcb485b8933728a2be7f29a46a6b",
-      "sourceName": "contracts/interfaces/ISemaphoreNullifiers.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreNullifiers"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/extensions/zkStake.sol": {
-      "lastModificationDate": 1645296162307,
-      "contentHash": "8cba076d3aa23d5960e267821789a0bf",
-      "sourceName": "contracts/extensions/zkStake.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../base/SemaphoreCore.sol",
-        "../base/SemaphoreGroups.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-        "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "zkStake"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/mockERC721.sol": {
-      "lastModificationDate": 1645309408970,
-      "contentHash": "36b779094fe63dd77fb46eded32c5885",
-      "sourceName": "contracts/mockERC721.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "@openzeppelin/contracts/utils/Strings.sol"
-      ],
-      "versionPragmas": [],
-      "artifacts": [
-        "MockERC721"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/semaphore/contracts/mockNFT.sol": {
-      "lastModificationDate": 1645309393912,
-      "contentHash": "d41d8cd98f00b204e9800998ecf8427e",
-      "sourceName": "contracts/mockNFT.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [],
-      "artifacts": []
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/base/SemaphoreConstants.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "55f4495d18b634bc9bcf9ded2ce35059",
-      "sourceName": "contracts/base/SemaphoreConstants.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": []
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/base/SemaphoreGroups.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "348ae6ec8e4130f404a03ad08602d714",
-      "sourceName": "contracts/base/SemaphoreGroups.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./SemaphoreConstants.sol",
-        "../interfaces/ISemaphoreGroups.sol",
-        "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol",
-        "@openzeppelin/contracts/utils/Context.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreGroups"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/interfaces/ISemaphoreGroups.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "15ff26dd3a8789e2248df7a8e1708939",
-      "sourceName": "contracts/interfaces/ISemaphoreGroups.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreGroups"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol": {
-      "lastModificationDate": 1645313911478,
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol": {
+      "lastModificationDate": 1651110278420,
       "contentHash": "9263953dd32f98f685863fc8e60cc704",
       "sourceName": "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol",
       "solcConfig": {
@@ -653,8 +146,8 @@
         "IncrementalBinaryTree"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1645313909845,
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1651110272350,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -688,8 +181,8 @@
         "Context"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol": {
-      "lastModificationDate": 1645313911478,
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol": {
+      "lastModificationDate": 1651110278410,
       "contentHash": "fd04704145cf2784b81cec317a522243",
       "sourceName": "@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol",
       "solcConfig": {
@@ -724,929 +217,9 @@
         "PoseidonT6"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/extensions/zkStake.sol": {
-      "lastModificationDate": 1646681420437,
-      "contentHash": "c4ed2cef42862815d6255e8b012ee616",
-      "sourceName": "contracts/extensions/zkStake.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../base/SemaphoreCore.sol",
-        "../base/SemaphoreGroups.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-        "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "zkStake"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/base/SemaphoreCore.sol": {
-      "lastModificationDate": 1646432491275,
-      "contentHash": "0b2c70ea934a9c21ea4785c976f64e9d",
-      "sourceName": "contracts/base/SemaphoreCore.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../interfaces/ISemaphoreCore.sol",
-        "./Verifier.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreCore"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1645313910410,
-      "contentHash": "27d219ec6f69478d065fdbfa7931da68",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol": {
-      "lastModificationDate": 1645313910202,
-      "contentHash": "54062ff887823a306b33ea6494a220bc",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721Receiver.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721Holder"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
-      "lastModificationDate": 1645313910194,
-      "contentHash": "88095889e59d16821879a8083f906503",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC721.sol",
-        "./IERC721Enumerable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721Enumerable"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/interfaces/ISemaphoreCore.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "8220350a4343ee276244ef335ad85260",
-      "sourceName": "contracts/interfaces/ISemaphoreCore.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreCore"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/base/Verifier.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "24402ffba0b43768dc1573f2d16a7c86",
-      "sourceName": "contracts/base/Verifier.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Pairing",
-        "Verifier"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1645313910386,
-      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC165"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1645313910422,
-      "contentHash": "592df588492d45fdcf46b3cb608c0fbf",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Receiver"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1645313910158,
-      "contentHash": "ead7082e39cf31875ff89b22f473500d",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC721.sol",
-        "./IERC721Receiver.sol",
-        "./extensions/IERC721Metadata.sol",
-        "../../utils/Address.sol",
-        "../../utils/Context.sol",
-        "../../utils/Strings.sol",
-        "../../utils/introspection/ERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
-      "lastModificationDate": 1645313910414,
-      "contentHash": "f69eb47f667b846a8698697d25eeff4e",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Enumerable"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1645313910418,
-      "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Metadata"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1645313909733,
-      "contentHash": "4cff8b2ea0d958750786b4e3ca308445",
-      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Address"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1645313910526,
-      "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
-      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Strings"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1645313910042,
-      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC165"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/mockERC721.sol": {
-      "lastModificationDate": 1645314409490,
-      "contentHash": "cc0275486a002b144a1c158e1433d834",
-      "sourceName": "contracts/mockERC721.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "@openzeppelin/contracts/utils/Strings.sol",
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol"
-      ],
-      "versionPragmas": [],
-      "artifacts": [
-        "stakingToken"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/extensions/SemaphoreWhistleblowing.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "b678642e57f2b36f10cb1a04401f6736",
-      "sourceName": "contracts/extensions/SemaphoreWhistleblowing.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../interfaces/ISemaphoreWhistleblowing.sol",
-        "../base/SemaphoreCore.sol",
-        "../base/SemaphoreGroups.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreWhistleblowing"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/interfaces/ISemaphoreWhistleblowing.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "2bde9aec7168eba9ca9d6de2b61ed4ec",
-      "sourceName": "contracts/interfaces/ISemaphoreWhistleblowing.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreWhistleblowing"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/extensions/SemaphoreVoting.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "e4723cec3b078c15c968f6c497446b91",
-      "sourceName": "contracts/extensions/SemaphoreVoting.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../interfaces/ISemaphoreVoting.sol",
-        "../base/SemaphoreCore.sol",
-        "../base/SemaphoreGroups.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "SemaphoreVoting"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/interfaces/ISemaphoreVoting.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "06b1ddda005d68815a86bd49c3ee9c4e",
-      "sourceName": "contracts/interfaces/ISemaphoreVoting.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreVoting"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/interfaces/ISemaphoreNullifiers.sol": {
-      "lastModificationDate": 1645310175190,
-      "contentHash": "e88cdcb485b8933728a2be7f29a46a6b",
-      "sourceName": "contracts/interfaces/ISemaphoreNullifiers.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ISemaphoreNullifiers"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/hardhat/console.sol": {
-      "lastModificationDate": 1645313911394,
-      "contentHash": "cc4777addd464ea56fa35b1c45df0591",
-      "sourceName": "hardhat/console.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.4.22 <0.9.0"
-      ],
-      "artifacts": [
-        "console"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1645313910398,
-      "contentHash": "302d9755e46bc69d7058b0cbe7185e37",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
-      "lastModificationDate": 1645313910350,
-      "contentHash": "59e1bc5713fdebc7f821dc52f4d3e0ef",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC1155"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
-      "lastModificationDate": 1645313910514,
-      "contentHash": "76814c83c32552ed2b521c816b4d801a",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20.sol",
-        "../../../utils/Address.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "SafeERC20"
-      ]
-    },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/extensions/zkStakeV2.sol": {
-      "lastModificationDate": 1646681793751,
-      "contentHash": "3596f00e7955795b9bf0fa4fda49bdba",
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/extensions/zkStakeV2.sol": {
+      "lastModificationDate": 1651112935370,
+      "contentHash": "5a5dbd7b148ba9f8cb41a4a4e91bc019",
       "sourceName": "contracts/extensions/zkStakeV2.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -1689,8 +262,190 @@
         "zkStakeV2"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
-      "lastModificationDate": 1645313909982,
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/base/SemaphoreCore.sol": {
+      "lastModificationDate": 1651112897390,
+      "contentHash": "d1ed5e3ef623cb7ac3ca6d2111c0bf4a",
+      "sourceName": "contracts/base/SemaphoreCore.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/ISemaphoreCore.sol",
+        "../interfaces/IVerifier.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "SemaphoreCore"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1651110277650,
+      "contentHash": "cc4777addd464ea56fa35b1c45df0591",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1651110273610,
+      "contentHash": "27d219ec6f69478d065fdbfa7931da68",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1651110273550,
+      "contentHash": "302d9755e46bc69d7058b0cbe7185e37",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+      "lastModificationDate": 1651110273410,
+      "contentHash": "59e1bc5713fdebc7f821dc52f4d3e0ef",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC1155"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
+      "lastModificationDate": 1651110272690,
       "contentHash": "5637bdad6fa692dbbce1eeca845bedd8",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol",
       "solcConfig": {
@@ -1726,8 +481,188 @@
         "ERC1155Holder"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
-      "lastModificationDate": 1645313910018,
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol": {
+      "lastModificationDate": 1651110273130,
+      "contentHash": "54062ff887823a306b33ea6494a220bc",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721Receiver.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721Holder"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+      "lastModificationDate": 1651110273940,
+      "contentHash": "76814c83c32552ed2b521c816b4d801a",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol",
+        "../../../utils/Address.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SafeERC20"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/interfaces/ISemaphoreCore.sol": {
+      "lastModificationDate": 1651110660810,
+      "contentHash": "78a21a95b78ee3eae9d945d0df433617",
+      "sourceName": "contracts/interfaces/ISemaphoreCore.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphoreCore"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/interfaces/IVerifier.sol": {
+      "lastModificationDate": 1651110592030,
+      "contentHash": "4d6faecc104076e2593d13c87b008f64",
+      "sourceName": "contracts/interfaces/IVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "IVerifier"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1651110273500,
+      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC165"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol": {
+      "lastModificationDate": 1651110272760,
       "contentHash": "55b180cf664783e9a2baac20e82683fb",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol",
       "solcConfig": {
@@ -1764,8 +699,8 @@
         "ERC1155Receiver"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
-      "lastModificationDate": 1645313910366,
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+      "lastModificationDate": 1651110273450,
       "contentHash": "90eddd06deda7317b4441f04ec26db4d",
       "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
       "solcConfig": {
@@ -1801,10 +736,307 @@
         "IERC1155Receiver"
       ]
     },
-    "/home/jjj/Hacking/ETHDENVER2022/zkNFT/contracts/extensions/testStake.sol": {
-      "lastModificationDate": 1646682268890,
-      "contentHash": "3ddb2ab96bdb7febe4c2cfcbdd5ba177",
-      "sourceName": "contracts/extensions/testStake.sol",
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1651110272780,
+      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC165"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1651110273650,
+      "contentHash": "592df588492d45fdcf46b3cb608c0fbf",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Receiver"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1651110272260,
+      "contentHash": "4cff8b2ea0d958750786b4e3ca308445",
+      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Address"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1651110273060,
+      "contentHash": "ead7082e39cf31875ff89b22f473500d",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC721.sol",
+        "./IERC721Receiver.sol",
+        "./extensions/IERC721Metadata.sol",
+        "../../utils/Address.sol",
+        "../../utils/Context.sol",
+        "../../utils/Strings.sol",
+        "../../utils/introspection/ERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1651110273640,
+      "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1651110273990,
+      "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
+      "lastModificationDate": 1651110273100,
+      "contentHash": "88095889e59d16821879a8083f906503",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC721.sol",
+        "./IERC721Enumerable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721Enumerable"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
+      "lastModificationDate": 1651110273630,
+      "contentHash": "f69eb47f667b846a8698697d25eeff4e",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Enumerable"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/extensions/zkStake.sol": {
+      "lastModificationDate": 1651112923420,
+      "contentHash": "b232987fec3fce332fa5fc6d02ea278a",
+      "sourceName": "contracts/extensions/zkStake.sol",
       "solcConfig": {
         "version": "0.8.4",
         "settings": {
@@ -1838,8 +1070,333 @@
         "^0.8.4"
       ],
       "artifacts": [
+        "zkStake"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/extensions/testStake.sol": {
+      "lastModificationDate": 1651112810100,
+      "contentHash": "dee58ecb55283b8299c28dd426e56b0f",
+      "sourceName": "contracts/extensions/testStake.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../base/SemaphoreCore.sol",
+        "../base/SemaphoreGroups.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
         "testStake"
       ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/extensions/SemaphoreWhistleblowing.sol": {
+      "lastModificationDate": 1651109846560,
+      "contentHash": "0e3bdd2bd9f1f740c233cdbaa7022d44",
+      "sourceName": "contracts/extensions/SemaphoreWhistleblowing.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/ISemaphoreWhistleblowing.sol",
+        "../base/SemaphoreCore.sol",
+        "../base/SemaphoreGroups.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "SemaphoreWhistleblowing"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/interfaces/ISemaphoreWhistleblowing.sol": {
+      "lastModificationDate": 1651110660960,
+      "contentHash": "d7a5a316ab0f4cbc1eaa3bde777391dd",
+      "sourceName": "contracts/interfaces/ISemaphoreWhistleblowing.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphoreWhistleblowing"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/extensions/SemaphoreVoting.sol": {
+      "lastModificationDate": 1651112137670,
+      "contentHash": "9a8ae9666068afea7e0c78b07d2d7069",
+      "sourceName": "contracts/extensions/SemaphoreVoting.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/ISemaphoreVoting.sol",
+        "../base/SemaphoreCore.sol",
+        "../base/SemaphoreGroups.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "SemaphoreVoting"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/interfaces/ISemaphoreVoting.sol": {
+      "lastModificationDate": 1651110660930,
+      "contentHash": "7968aa63364f8f12bc2806a8df12d97b",
+      "sourceName": "contracts/interfaces/ISemaphoreVoting.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphoreVoting"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/mockERC721.sol": {
+      "lastModificationDate": 1647047304630,
+      "contentHash": "cc0275486a002b144a1c158e1433d834",
+      "sourceName": "contracts/mockERC721.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/utils/Strings.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol"
+      ],
+      "versionPragmas": [],
+      "artifacts": [
+        "stakingToken"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/base/Verifier.sol": {
+      "lastModificationDate": 1651109687550,
+      "contentHash": "d0f5bd982f9e813a765321c1011fabc2",
+      "sourceName": "contracts/base/Verifier.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "Pairing",
+        "Verifier"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/interfaces/ISemaphoreNullifiers.sol": {
+      "lastModificationDate": 1651110660890,
+      "contentHash": "5b6d575dd01c398ea16a1fdd2a688473",
+      "sourceName": "contracts/interfaces/ISemaphoreNullifiers.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphoreNullifiers"
+      ]
+    },
+    "/home/jjj/ZKHACKS/ZK_STAKE/zkNFT/contracts/mockERC1155.sol": {
+      "lastModificationDate": 1647821417270,
+      "contentHash": "d41d8cd98f00b204e9800998ecf8427e",
+      "sourceName": "contracts/mockERC1155.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": []
     }
   }
 }

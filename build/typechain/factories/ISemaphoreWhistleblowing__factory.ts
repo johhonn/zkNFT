@@ -40,9 +40,9 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "string",
+        internalType: "bytes32",
         name: "leak",
-        type: "string",
+        type: "bytes32",
       },
     ],
     name: "LeakPublished",
@@ -78,6 +78,11 @@ const _abi = [
         name: "editor",
         type: "address",
       },
+      {
+        internalType: "uint8",
+        name: "depth",
+        type: "uint8",
+      },
     ],
     name: "createEntity",
     outputs: [],
@@ -87,9 +92,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "string",
+        internalType: "bytes32",
         name: "leak",
-        type: "string",
+        type: "bytes32",
       },
       {
         internalType: "uint256",

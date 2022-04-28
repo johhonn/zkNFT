@@ -19,8 +19,8 @@ export interface ISemaphoreGroupsInterface extends utils.Interface {
   contractName: "ISemaphoreGroups";
   functions: {
     "getDepth(uint256)": FunctionFragment;
+    "getNumberOfLeaves(uint256)": FunctionFragment;
     "getRoot(uint256)": FunctionFragment;
-    "getSize(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -28,35 +28,38 @@ export interface ISemaphoreGroupsInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getRoot",
+    functionFragment: "getNumberOfLeaves",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getSize",
+    functionFragment: "getRoot",
     values: [BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "getDepth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getNumberOfLeaves",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getSize", data: BytesLike): Result;
 
   events: {
-    "GroupAdded(uint256,uint8)": EventFragment;
+    "GroupCreated(uint256,uint8,uint256)": EventFragment;
     "MemberAdded(uint256,uint256,uint256)": EventFragment;
     "MemberRemoved(uint256,uint256,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "GroupAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "GroupCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberAdded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberRemoved"): EventFragment;
 }
 
-export type GroupAddedEvent = TypedEvent<
-  [BigNumber, number],
-  { groupId: BigNumber; depth: number }
+export type GroupCreatedEvent = TypedEvent<
+  [BigNumber, number, BigNumber],
+  { groupId: BigNumber; depth: number; zeroValue: BigNumber }
 >;
 
-export type GroupAddedEventFilter = TypedEventFilter<GroupAddedEvent>;
+export type GroupCreatedEventFilter = TypedEventFilter<GroupCreatedEvent>;
 
 export type MemberAddedEvent = TypedEvent<
   [BigNumber, BigNumber, BigNumber],
@@ -103,30 +106,32 @@ export interface ISemaphoreGroups extends BaseContract {
     getDepth(
       groupId: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    getNumberOfLeaves(
+      groupId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
   };
 
-  getDepth(
+  getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+  getNumberOfLeaves(
     groupId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getRoot(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getSize(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
   callStatic: {
-    getDepth(
+    getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -135,22 +140,19 @@ export interface ISemaphoreGroups extends BaseContract {
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   filters: {
-    "GroupAdded(uint256,uint8)"(
+    "GroupCreated(uint256,uint8,uint256)"(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
-    GroupAdded(
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
+    GroupCreated(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
       groupId?: BigNumberish | null,
@@ -181,12 +183,12 @@ export interface ISemaphoreGroups extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getRoot(
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSize(
+    getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -198,12 +200,12 @@ export interface ISemaphoreGroups extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getRoot(
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getSize(
+    getRoot(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

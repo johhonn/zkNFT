@@ -25,6 +25,7 @@ contract zkStakeV2 is
     mapping(uint256 => uint256) public commitmentNFTs;
     mapping(uint256 => STAKE_TYPE) public entityTokenInterface;
     mapping(uint256 => uint256) public stakeAmounts;
+    address public verifier;
     enum STAKE_TYPE {
         ERC721,
         ERC1155,
@@ -40,6 +41,10 @@ contract zkStakeV2 is
             "SemaphoreWhistleblowing: caller is not the editor"
         );
         _;
+    }
+
+    constructor(address v) {
+        verifier = v;
     }
 
     function getGroupCommitments(uint256 g)
@@ -58,7 +63,7 @@ contract zkStakeV2 is
         STAKE_TYPE option,
         uint256 value
     ) public {
-        _createGroup(entityId, 20);
+        _createGroup(entityId, 0, 20);
         entityTokenInterface[entityId] = option;
         if (option == STAKE_TYPE.ERC721) {
             stakeAmounts[entityId] = 1;
@@ -145,7 +150,7 @@ contract zkStakeV2 is
     }
 
     function verifyIdentityChallenge(
-        string calldata challenge,
+        bytes32 challenge,
         uint256 nullifierHash,
         uint256 entityId,
         uint256[8] calldata proof
@@ -155,7 +160,8 @@ contract zkStakeV2 is
             groups[entityId].root,
             nullifierHash,
             entityId,
-            proof
+            proof,
+            IVerifier(verifier)
         );
         return res;
     }

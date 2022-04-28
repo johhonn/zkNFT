@@ -3,14 +3,19 @@ pragma solidity ^0.8.4;
 
 import "../base/SemaphoreCore.sol";
 import "../base/SemaphoreGroups.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 
-contract testStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
+contract testStake is SemaphoreCore, SemaphoreGroups {
     /// @dev Gets an editor address and return their entity.
     mapping(address => uint256) private entities;
     mapping(uint256 => uint256[]) public commitments;
     event EntityCreated(uint256 entityId, address indexed editor);
+
+    address verifier;
+
+    constructor(address v) {
+        verifier = v;
+    }
+
     /// @dev Checks if the editor is the transaction sender.
     /// @param entityId: Id of the entity.
     modifier onlyEditor(uint256 entityId) {
@@ -19,6 +24,14 @@ contract testStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
             "SemaphoreWhistleblowing: caller is not the editor"
         );
         _;
+    }
+
+    function getEncodedChallenge(string memory challenge)
+        public
+        view
+        returns (bytes32)
+    {
+        return bytes32(keccak256(abi.encode(challenge)));
     }
 
     function getGroupCommitments(uint256 g)
@@ -31,7 +44,7 @@ contract testStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
 
     /// @dev See {ISemaphoreWhistleblowing-createEntity}.
     function createEntity(uint256 entityId, address editor) public {
-        _createGroup(entityId, 20);
+        _createGroup(entityId, 20, 0);
 
         entities[editor] = entityId;
 
@@ -61,7 +74,7 @@ contract testStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
     }
 
     function verifyIdentityChallenge(
-        string calldata challenge,
+        bytes32 challenge,
         uint256 nullifierHash,
         uint256 entityId,
         uint256[8] calldata proof
@@ -71,7 +84,8 @@ contract testStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
             groups[entityId].root,
             nullifierHash,
             entityId,
-            proof
+            proof,
+            IVerifier(verifier)
         );
         return res;
     }

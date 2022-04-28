@@ -1,34 +1,35 @@
-//SPDX-License-Identifier: GPL-3.0
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import {SNARK_SCALAR_FIELD, TREE_ZERO_VALUE} from "./SemaphoreConstants.sol";
+import {SNARK_SCALAR_FIELD} from "./SemaphoreConstants.sol";
 import "../interfaces/ISemaphoreGroups.sol";
 import "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 
 /// @title Semaphore groups contract.
 /// @dev The following code allows you to create groups, add and remove members.
-/// You can use getters to obtain informations about groups, whereas the `rootHistory`
-/// mapping can be used to check if a Semaphore proof root exists onchain.
+/// You can use getters to obtain informations about groups (root, depth, number of leaves).
 abstract contract SemaphoreGroups is Context, ISemaphoreGroups {
   using IncrementalBinaryTree for IncrementalTreeData;
 
   /// @dev Gets a group id and returns the group/tree data.
   mapping(uint256 => IncrementalTreeData) internal groups;
 
-  /// @dev Gets a root hash and returns the group id.
-  /// It can be used to check if the root a Semaphore proof exists.
-  mapping(uint256 => uint256) internal rootHistory;
-
   /// @dev Creates a new group by initializing the associated tree.
   /// @param groupId: Id of the group.
   /// @param depth: Depth of the tree.
-  function _createGroup(uint256 groupId, uint8 depth) internal virtual {
+  /// @param zeroValue: Zero value of the tree.
+  function _createGroup(
+    uint256 groupId,
+    uint8 depth,
+    uint256 zeroValue
+  ) internal virtual {
+    require(groupId < SNARK_SCALAR_FIELD, "SemaphoreGroups: group id must be < SNARK_SCALAR_FIELD");
     require(getDepth(groupId) == 0, "SemaphoreGroups: group already exists");
 
-    groups[groupId].init(depth, TREE_ZERO_VALUE);
+    groups[groupId].init(depth, zeroValue);
 
-    emit GroupAdded(groupId, depth);
+    emit GroupCreated(groupId, depth, zeroValue);
   }
 
   /// @dev Adds an identity commitment to an existing group.
@@ -40,7 +41,6 @@ abstract contract SemaphoreGroups is Context, ISemaphoreGroups {
     groups[groupId].insert(identityCommitment);
 
     uint256 root = getRoot(groupId);
-    rootHistory[root] = groupId;
 
     emit MemberAdded(groupId, identityCommitment, root);
   }
@@ -62,9 +62,8 @@ abstract contract SemaphoreGroups is Context, ISemaphoreGroups {
     groups[groupId].remove(identityCommitment, proofSiblings, proofPathIndices);
 
     uint256 root = getRoot(groupId);
-    rootHistory[root] = groupId;
 
-    emit MemberRemoved(groupId, identityCommitment, groups[groupId].root);
+    emit MemberRemoved(groupId, identityCommitment, root);
   }
 
   /// @dev See {ISemaphoreGroups-getRoot}.
@@ -73,12 +72,12 @@ abstract contract SemaphoreGroups is Context, ISemaphoreGroups {
   }
 
   /// @dev See {ISemaphoreGroups-getDepth}.
-  function getDepth(uint256 groupId) public view virtual override returns (uint256) {
+  function getDepth(uint256 groupId) public view virtual override returns (uint8) {
     return groups[groupId].depth;
   }
 
-  /// @dev See {ISemaphoreGroups-getSize}.
-  function getSize(uint256 groupId) public view virtual override returns (uint256) {
+  /// @dev See {ISemaphoreGroups-getNumberOfLeaves}.
+  function getNumberOfLeaves(uint256 groupId) public view virtual override returns (uint256) {
     return groups[groupId].numberOfLeaves;
   }
 }

@@ -11,7 +11,9 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
     mapping(address => uint256) private entities;
     mapping(uint256 => address) public membershipTokens;
     mapping(uint256 => uint256) public commitmentNFTs;
+    mapping(uint256 => uint256[]) public commitments;
     event EntityCreated(uint256 entityId, address indexed editor);
+    address public verifier;
     /// @dev Checks if the editor is the transaction sender.
     /// @param entityId: Id of the entity.
     modifier onlyEditor(uint256 entityId) {
@@ -22,13 +24,17 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
         _;
     }
 
+    constructor(address v) {
+        verifier = v;
+    }
+
     /// @dev See {ISemaphoreWhistleblowing-createEntity}.
     function createEntity(
         uint256 entityId,
         address editor,
         address token
     ) public {
-        _createGroup(entityId, 20);
+        _createGroup(entityId, 0, 20);
 
         entities[editor] = entityId;
         membershipTokens[entityId] = token;
@@ -46,6 +52,7 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
             address(this),
             id
         );
+        commitments[entityId].push(identityCommitment);
         commitmentNFTs[entityId] = id;
         _addMember(entityId, identityCommitment);
     }
@@ -72,7 +79,7 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
     }
 
     function verifyIdentityChallenge(
-        string calldata challenge,
+        bytes32 challenge,
         uint256 nullifierHash,
         uint256 entityId,
         uint256[8] calldata proof
@@ -82,7 +89,8 @@ contract zkStake is SemaphoreCore, SemaphoreGroups, ERC721Holder {
             groups[entityId].root,
             nullifierHash,
             entityId,
-            proof
+            proof,
+            IVerifier(verifier)
         );
         return res;
     }

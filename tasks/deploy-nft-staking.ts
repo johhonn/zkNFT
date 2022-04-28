@@ -10,6 +10,7 @@ task('deploy:nft-staking', 'Deploy a SemaphoreStaking contract')
       const poseidonBytecode = poseidonContract.createCode(2)
 
       const [signer] = await ethers.getSigners()
+      console.log(`signer account is ${signer.address}`)
       const NFTFactory = await ethers.getContractFactory('stakingToken')
       const nft = await NFTFactory.deploy('test token', 'test', 'testuri')
       await nft.deployed()
@@ -61,6 +62,10 @@ task('deploy:nft-staking', 'Deploy a SemaphoreStaking contract')
       let call = await contract.createEntity(1, signer.address, nft.address)
       await call.wait()
       console.log('entity has been created via nft')
+      for (let i = 0; i < 10; i++) {
+        await nft.simpleMint(signer.address)
+      }
+
       return { contract: contract, nft: nft }
     },
   )

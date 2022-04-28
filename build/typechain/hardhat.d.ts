@@ -85,6 +85,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SemaphoreGroups__factory>;
     getContractFactory(
+      name: "Pairing",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Pairing__factory>;
+    getContractFactory(
       name: "Verifier",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Verifier__factory>;
@@ -128,6 +132,10 @@ declare module "hardhat/types/runtime" {
       name: "ISemaphoreWhistleblowing",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ISemaphoreWhistleblowing__factory>;
+    getContractFactory(
+      name: "IVerifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IVerifier__factory>;
     getContractFactory(
       name: "MockERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -228,6 +236,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SemaphoreGroups>;
     getContractAt(
+      name: "Pairing",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Pairing>;
+    getContractAt(
       name: "Verifier",
       address: string,
       signer?: ethers.Signer
@@ -282,6 +295,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ISemaphoreWhistleblowing>;
+    getContractAt(
+      name: "IVerifier",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IVerifier>;
     getContractAt(
       name: "MockERC721",
       address: string,

@@ -21,13 +21,12 @@ export interface SemaphoreWhistleblowingInterface extends utils.Interface {
   contractName: "SemaphoreWhistleblowing";
   functions: {
     "addWhistleblower(uint256,uint256)": FunctionFragment;
-    "createEntity(uint256,address)": FunctionFragment;
+    "createEntity(uint256,address,uint8)": FunctionFragment;
     "getDepth(uint256)": FunctionFragment;
+    "getNumberOfLeaves(uint256)": FunctionFragment;
     "getRoot(uint256)": FunctionFragment;
-    "getSize(uint256)": FunctionFragment;
-    "publishLeak(string,uint256,uint256,uint256[8])": FunctionFragment;
+    "publishLeak(bytes32,uint256,uint256,uint256[8])": FunctionFragment;
     "removeWhistleblower(uint256,uint256,uint256[],uint8[])": FunctionFragment;
-    "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -36,10 +35,14 @@ export interface SemaphoreWhistleblowingInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createEntity",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "getDepth",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNumberOfLeaves",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -47,25 +50,12 @@ export interface SemaphoreWhistleblowingInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getSize",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "publishLeak",
-    values: [string, BigNumberish, BigNumberish, BigNumberish[]]
+    values: [BytesLike, BigNumberish, BigNumberish, BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "removeWhistleblower",
     values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "verifyProof",
-    values: [
-      [BigNumberish, BigNumberish],
-      [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      [BigNumberish, BigNumberish],
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
-    ]
   ): string;
 
   decodeFunctionResult(
@@ -77,8 +67,11 @@ export interface SemaphoreWhistleblowingInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getDepth", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getNumberOfLeaves",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getRoot", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getSize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "publishLeak",
     data: BytesLike
@@ -87,22 +80,18 @@ export interface SemaphoreWhistleblowingInterface extends utils.Interface {
     functionFragment: "removeWhistleblower",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "verifyProof",
-    data: BytesLike
-  ): Result;
 
   events: {
     "EntityCreated(uint256,address)": EventFragment;
-    "GroupAdded(uint256,uint8)": EventFragment;
-    "LeakPublished(uint256,string)": EventFragment;
+    "GroupCreated(uint256,uint8,uint256)": EventFragment;
+    "LeakPublished(uint256,bytes32)": EventFragment;
     "MemberAdded(uint256,uint256,uint256)": EventFragment;
     "MemberRemoved(uint256,uint256,uint256)": EventFragment;
     "NullifierHashAdded(uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "EntityCreated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "GroupAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "GroupCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LeakPublished"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberAdded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberRemoved"): EventFragment;
@@ -116,12 +105,12 @@ export type EntityCreatedEvent = TypedEvent<
 
 export type EntityCreatedEventFilter = TypedEventFilter<EntityCreatedEvent>;
 
-export type GroupAddedEvent = TypedEvent<
-  [BigNumber, number],
-  { groupId: BigNumber; depth: number }
+export type GroupCreatedEvent = TypedEvent<
+  [BigNumber, number, BigNumber],
+  { groupId: BigNumber; depth: number; zeroValue: BigNumber }
 >;
 
-export type GroupAddedEventFilter = TypedEventFilter<GroupAddedEvent>;
+export type GroupCreatedEventFilter = TypedEventFilter<GroupCreatedEvent>;
 
 export type LeakPublishedEvent = TypedEvent<
   [BigNumber, string],
@@ -189,10 +178,16 @@ export interface SemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     getDepth(
+      groupId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -202,13 +197,8 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -222,14 +212,6 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       proofPathIndices: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
-    ): Promise<[boolean] & { r: boolean }>;
   };
 
   addWhistleblower(
@@ -241,20 +223,21 @@ export interface SemaphoreWhistleblowing extends BaseContract {
   createEntity(
     entityId: BigNumberish,
     editor: string,
+    depth: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getDepth(
+  getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+  getNumberOfLeaves(
     groupId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   getRoot(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getSize(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
   publishLeak(
-    leak: string,
+    leak: BytesLike,
     nullifierHash: BigNumberish,
     entityId: BigNumberish,
     proof: BigNumberish[],
@@ -269,14 +252,6 @@ export interface SemaphoreWhistleblowing extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  verifyProof(
-    a: [BigNumberish, BigNumberish],
-    b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-    c: [BigNumberish, BigNumberish],
-    input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   callStatic: {
     addWhistleblower(
       entityId: BigNumberish,
@@ -287,10 +262,13 @@ export interface SemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getDepth(
+    getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -300,13 +278,8 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -320,14 +293,6 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       proofPathIndices: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
-    ): Promise<boolean>;
   };
 
   filters: {
@@ -340,16 +305,18 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       editor?: string | null
     ): EntityCreatedEventFilter;
 
-    "GroupAdded(uint256,uint8)"(
+    "GroupCreated(uint256,uint8,uint256)"(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
-    GroupAdded(
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
+    GroupCreated(
       groupId?: BigNumberish | null,
-      depth?: null
-    ): GroupAddedEventFilter;
+      depth?: null,
+      zeroValue?: null
+    ): GroupCreatedEventFilter;
 
-    "LeakPublished(uint256,string)"(
+    "LeakPublished(uint256,bytes32)"(
       entityId?: BigNumberish | null,
       leak?: null
     ): LeakPublishedEventFilter;
@@ -396,10 +363,16 @@ export interface SemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     getDepth(
+      groupId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -409,13 +382,8 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -428,14 +396,6 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       proofSiblings: BigNumberish[],
       proofPathIndices: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
@@ -449,10 +409,16 @@ export interface SemaphoreWhistleblowing extends BaseContract {
     createEntity(
       entityId: BigNumberish,
       editor: string,
+      depth: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     getDepth(
+      groupId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getNumberOfLeaves(
       groupId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -462,13 +428,8 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getSize(
-      groupId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     publishLeak(
-      leak: string,
+      leak: BytesLike,
       nullifierHash: BigNumberish,
       entityId: BigNumberish,
       proof: BigNumberish[],
@@ -481,14 +442,6 @@ export interface SemaphoreWhistleblowing extends BaseContract {
       proofSiblings: BigNumberish[],
       proofPathIndices: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

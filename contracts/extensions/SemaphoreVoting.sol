@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: GPL-3.0
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
 import "../interfaces/ISemaphoreVoting.sol";
@@ -8,73 +8,130 @@ import "../base/SemaphoreGroups.sol";
 /// @title Semaphore voting contract.
 /// @dev The following code allows you to create polls, add voters and allow them to vote anonymously.
 contract SemaphoreVoting is ISemaphoreVoting, SemaphoreCore, SemaphoreGroups {
-  /// @dev Gets a poll id and returns the poll data.
-  mapping(uint256 => Poll) private polls;
+    /// @dev Gets a tree depth and returns its verifier address.
+    mapping(uint8 => IVerifier) internal verifiers;
 
-  /// @dev Checks if the poll coordinator is the transaction sender.
-  /// @param pollId: Id of the poll.
-  modifier onlyCoordinator(uint256 pollId) {
-    require(polls[pollId].coordinator == _msgSender(), "SemaphoreVoting: caller is not the poll coordinator");
-    _;
-  }
+    /// @dev Gets a poll id and returns the poll data.
+    mapping(uint256 => Poll) internal polls;
 
-  /// @dev See {ISemaphoreVoting-createPoll}.
-  function createPoll(uint256 pollId, address coordinator) public override {
-    _createGroup(pollId, 20);
+    /// @dev Since there can be multiple verifier contracts (each associated with a certain tree depth),
+    /// it is necessary to pass the addresses of the previously deployed contracts with the associated
+    /// tree depth. Depending on the depth chosen when creating the poll, a certain verifier will be
+    /// used to verify that the proof is correct.
+    /// @param depths: Three depths used in verifiers.
+    /// @param verifierAddresses: Verifier addresses.
+    constructor(uint8[] memory depths, address[] memory verifierAddresses) {
+        require(
+            depths.length == verifierAddresses.length,
+            "SemaphoreVoting: parameters lists does not have the same length"
+        );
 
-    Poll memory poll;
+        for (uint8 i = 0; i < depths.length; i++) {
+            verifiers[depths[i]] = IVerifier(verifierAddresses[i]);
+        }
+    }
 
-    poll.coordinator = coordinator;
+    /// @dev Checks if the poll coordinator is the transaction sender.
+    /// @param pollId: Id of the poll.
+    modifier onlyCoordinator(uint256 pollId) {
+        require(
+            polls[pollId].coordinator == _msgSender(),
+            "SemaphoreVoting: caller is not the poll coordinator"
+        );
+        _;
+    }
 
-    polls[pollId] = poll;
+    /// @dev See {ISemaphoreVoting-createPoll}.
+    function createPoll(
+        uint256 pollId,
+        address coordinator,
+        uint8 depth
+    ) public override {
+        require(
+            address(verifiers[depth]) != address(0),
+            "SemaphoreVoting: depth value is not supported"
+        );
 
-    emit PollCreated(pollId, coordinator);
-  }
+        _createGroup(pollId, depth, 0);
 
-  /// @dev See {ISemaphoreVoting-addVoter}.
-  function addVoter(uint256 pollId, uint256 identityCommitment) public override onlyCoordinator(pollId) {
-    require(polls[pollId].state == PollState.Created, "SemaphoreVoting: voters can only be added before voting");
+        Poll memory poll;
 
-    _addMember(pollId, identityCommitment);
-  }
+        poll.coordinator = coordinator;
 
-  /// @dev See {ISemaphoreVoting-addVoter}.
-  function startPoll(uint256 pollId, uint256 encryptionKey) public override onlyCoordinator(pollId) {
-    require(polls[pollId].state == PollState.Created, "SemaphoreVoting: poll has already been started");
+        polls[pollId] = poll;
 
-    polls[pollId].state = PollState.Ongoing;
+        emit PollCreated(pollId, coordinator);
+    }
 
-    emit PollStarted(pollId, _msgSender(), encryptionKey);
-  }
+    /// @dev See {ISemaphoreVoting-addVoter}.
+    function addVoter(uint256 pollId, uint256 identityCommitment)
+        public
+        override
+        onlyCoordinator(pollId)
+    {
+        require(
+            polls[pollId].state == PollState.Created,
+            "SemaphoreVoting: voters can only be added before voting"
+        );
 
-  /// @dev See {ISemaphoreVoting-castVote}.
-  function castVote(
-    string calldata vote,
-    uint256 nullifierHash,
-    uint256 pollId,
-    uint256[8] calldata proof
-  ) public override onlyCoordinator(pollId) {
-    Poll memory poll = polls[pollId];
+        _addMember(pollId, identityCommitment);
+    }
 
-    require(poll.state == PollState.Ongoing, "SemaphoreVoting: vote can only be cast in an ongoing poll");
+    /// @dev See {ISemaphoreVoting-addVoter}.
+    function startPoll(uint256 pollId, uint256 encryptionKey)
+        public
+        override
+        onlyCoordinator(pollId)
+    {
+        require(
+            polls[pollId].state == PollState.Created,
+            "SemaphoreVoting: poll has already been started"
+        );
 
-    require(
-      _isValidProof(vote, groups[pollId].root, nullifierHash, pollId, proof),
-      "SemaphoreVoting: the proof is not valid"
-    );
+        polls[pollId].state = PollState.Ongoing;
 
-    // Prevent double-voting (nullifierHash = hash(pollId + identityNullifier)).
-    _saveNullifierHash(nullifierHash);
+        emit PollStarted(pollId, _msgSender(), encryptionKey);
+    }
 
-    emit VoteAdded(pollId, vote);
-  }
+    /// @dev See {ISemaphoreVoting-castVote}.
+    function castVote(
+        bytes32 vote,
+        uint256 nullifierHash,
+        uint256 pollId,
+        uint256[8] calldata proof
+    ) public override onlyCoordinator(pollId) {
+        Poll memory poll = polls[pollId];
 
-  /// @dev See {ISemaphoreVoting-publishDecryptionKey}.
-  function endPoll(uint256 pollId, uint256 decryptionKey) public override onlyCoordinator(pollId) {
-    require(polls[pollId].state == PollState.Ongoing, "SemaphoreVoting: poll is not ongoing");
+        require(
+            poll.state == PollState.Ongoing,
+            "SemaphoreVoting: vote can only be cast in an ongoing poll"
+        );
 
-    polls[pollId].state = PollState.Ended;
+        uint8 depth = getDepth(pollId);
+        uint256 root = getRoot(pollId);
+        IVerifier verifier = verifiers[depth];
 
-    emit PollEnded(pollId, _msgSender(), decryptionKey);
-  }
+        _verifyProof(vote, root, nullifierHash, pollId, proof, verifier);
+
+        // Prevent double-voting (nullifierHash = hash(pollId + identityNullifier)).
+        _saveNullifierHash(nullifierHash);
+
+        emit VoteAdded(pollId, vote);
+    }
+
+    /// @dev See {ISemaphoreVoting-publishDecryptionKey}.
+    function endPoll(uint256 pollId, uint256 decryptionKey)
+        public
+        override
+        onlyCoordinator(pollId)
+    {
+        require(
+            polls[pollId].state == PollState.Ongoing,
+            "SemaphoreVoting: poll is not ongoing"
+        );
+
+        polls[pollId].state = PollState.Ended;
+
+        emit PollEnded(pollId, _msgSender(), decryptionKey);
+    }
 }

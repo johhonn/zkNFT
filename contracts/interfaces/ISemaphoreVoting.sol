@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: GPL-3.0
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
 /// @title SemaphoreVoting interface.
@@ -29,7 +29,7 @@ interface ISemaphoreVoting {
   /// @dev Emitted when a user votes on a poll.
   /// @param pollId: Id of the poll.
   /// @param vote: User encrypted vote.
-  event VoteAdded(uint256 indexed pollId, string vote);
+  event VoteAdded(uint256 indexed pollId, bytes32 vote);
 
   /// @dev Emitted when a poll is ended.
   /// @param pollId: Id of the poll.
@@ -40,7 +40,12 @@ interface ISemaphoreVoting {
   /// @dev Creates a poll and the associated Merkle tree/group.
   /// @param pollId: Id of the poll.
   /// @param coordinator: Coordinator of the poll.
-  function createPoll(uint256 pollId, address coordinator) external;
+  /// @param depth: Depth of the tree.
+  function createPoll(
+    uint256 pollId,
+    address coordinator,
+    uint8 depth
+  ) external;
 
   /// @dev Adds a voter to a poll.
   /// @param pollId: Id of the poll.
@@ -49,8 +54,8 @@ interface ISemaphoreVoting {
 
   /// @dev Starts a pull and publishes the key to encrypt the votes.
   /// @param pollId: Id of the poll.
-  /// @param decryptionKey: Key to decrypt poll votes.
-  function startPoll(uint256 pollId, uint256 decryptionKey) external;
+  /// @param encryptionKey: Key to encrypt poll votes.
+  function startPoll(uint256 pollId, uint256 encryptionKey) external;
 
   /// @dev Casts an anonymous vote in a poll.
   /// @param vote: Encrypted vote.
@@ -58,7 +63,7 @@ interface ISemaphoreVoting {
   /// @param pollId: Id of the poll.
   /// @param proof: Private zk-proof parameters.
   function castVote(
-    string calldata vote,
+    bytes32 vote,
     uint256 nullifierHash,
     uint256 pollId,
     uint256[8] calldata proof
